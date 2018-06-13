@@ -338,7 +338,7 @@ if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["clas
 }
 
 ob_start();
-ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family:'Nanum Gothic Coding', monospace;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style>");
+ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family: 'NanumSquare', sans-serif;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style>");
 ob_echo("## IPSC MACRO 18.06.09 ##");
 ob_echo("## (c) 2018 Yang-Jun-Young ##");
 ob_echo("#");
