@@ -1,17 +1,13 @@
 @import "https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css";
 @import "https://fonts.googleapis.com/css?family=Gugi";
 body {
-  font-size: 1.1rem;
   font-family: 'NanumSquare', sans-serif;
   text-align: center;
 }
 hr {
-  background: #aaa;
+  background: #ccc;
   border: 0;
-  height: 1px;
-}
-p {
-  font-size: 15px;
+  height: 1.6px;
 }
 h1 {
   font-size: 3.5rem;
@@ -47,8 +43,6 @@ h1 {
 #form-submit {
   margin-top: 17px;
   padding: 0 30px;
-  font-size: 15px;
-  font-family: 'NanumSquare', sans-serif;
 }
 #ifrm {
   width: 100%;
