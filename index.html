@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="theme-color" content="#90a4ae"/>
+	<link rel="shortcut icon" href="https://res.cloudinary.com/dkpdmzje0/image/upload/v1528383890/favicon.ico">
+
+	<meta property="og:title" content="IPSC MACRO"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://yangjunyoung.ml"/>
+	<meta property="og:image" content="https://res.cloudinary.com/dkpdmzje0/image/upload/v1528862437/ipsc_macro.png"/>
+	<meta property="og:description" content="IPSCHOOL 매크로"/>
+
+	<title>IPSC MACRO</title>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/dkpdmzje0/raw/upload/v1528862841/main.min.css">
+</head>
+<body class="blue-grey lighten-2">
+	<script type="text/javascript">
+		var classSelected;
+		var setID;
+		var setPW;
+		function start_macro(){
+			if(setID == "18dchinv" || setID == ""){
+				alert("아이디를 입력해주세요.")
+			} else if(setPW == ""){
+				alert("비밀번호를 입력해주세요.")
+			} else {
+				document.getElementById("form-main").style.display = "none";
+				document.getElementById("ifrm").classList.remove("hidden");
+				document.getElementById("ifrm-hr").classList.remove("hidden");
+				document.form_main.target ="ifrm"
+				document.form_main.action = "/ipsc_login.php";
+  			document.form_main.submit();
+			}
+		}
+	</script>
+	<div class="container">
+		<div id="main" class="card-panel">
+			<h1>IPSC MACRO</h1>
+
+			<form id="form-main" name="form_main" method="POST">
+				<hr>
+				<p>진행할 강좌 선택</p>
+		    <p>
+		      <label>
+		        <input name="class" type="radio" value="6" tabindex=2 checked />
+		        <span>[6월] 발명과 창의성(9)</span>
+		      </label>
+		    </p>
+		    <p>
+		      <label>
+		        <input name="class" type="radio" value="7" tabindex=3 />
+		        <span>[7월] 세상을 바꾼 발명(3)</span>
+		      </label>
+		    </p>
+		    <p>
+		      <label>
+		        <input name="class" type="radio" value="8" tabindex=4 />
+		        <span>[8월] 저작권과 친구될래요(3)</span>
+		      </label>
+		    </p>
+		    <hr>
+		    <p>계정 정보 입력</p>
+	      <div class="row">
+			    <div class="input-field col m6 s12">
+			      <input value="18dchinv" name="form_id" type="text" spellcheck="false" autocomplete="off" tabindex=5 required>
+			      <label for="form_id">아이디</label>
+			    </div>
+			    <div class="input-field col m6 s12">
+			      <input id="form_pw" name="form_pw" type="password" tabindex=6 required>
+			      <label for="form_pw">비밀번호</label>
+			    </div>
+			  </div>
+			  <hr>
+			  <button id="form-submit" class="btn waves-effect waves-light center" onclick="start_macro()">실행
+			    <i class="material-icons right">send</i>
+			  </button>
+		  </form>
+		  <hr id="ifrm-hr" class="hidden">
+		  <iframe id="ifrm" name="ifrm" class="hidden" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+  	</div>
+  	<p class="footer"><b>v180612 (Stable)</b><br>ⓒ 2018 Yang-Jun-Young</p>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+</body>
+</html>
