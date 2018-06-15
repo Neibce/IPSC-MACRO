@@ -321,6 +321,20 @@ function ipsc_study_4($page_num, $sid){
 	}
 }
 
+function get_study_name($num){
+	switch ($num) {
+		case '6':
+			return "[6월] 발명과 창의성(9)";
+			break;
+		case '7':
+			return "[7월] 세상을 바꾼 발명(3)";
+			break;
+		case '8':
+			return "[8월] 저작권과 친구될래요(3)";
+		break;
+	}
+}
+
 function ob_echo($string){
 	echo $string;
 	echo "<br>";
@@ -339,7 +353,7 @@ if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["clas
 
 ob_start();
 ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family: 'NanumSquare', sans-serif;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style>");
-ob_echo("## IPSC MACRO 18.06.09 ##");
+ob_echo("## IPSC MACRO 18.06.16 ##");
 ob_echo("## (c) 2018 Yang-Jun-Young ##");
 ob_echo("#");
 ob_echo("** 새로고침 혹은 페이지 이동 시 정상 작동하지 않을 수 있습니다.");
@@ -363,6 +377,7 @@ if(stristr($c_response, "document.redirect.submit();")) {
 
 	ob_echo("#");
 	ob_echo("## 작업을 시작합니다.");
+	ob_echo("## 선택한 강좌: ".get_study_name($_POST["class"]));
 	ob_echo("## 작업 진행 중에 창을 닫을 경우 작업이 중단 될 수 있습니다.");
 	ob_echo("#");
 	sleep(4);
