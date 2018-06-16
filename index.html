@@ -22,10 +22,10 @@
 	<script type="text/javascript">
 		window.onpopstate = undefined;
 
-		var classSelected;
-		var setID;
-		var setPW;
 		function start_macro(){
+			var setID = document.getElementById("form_id").value;
+			var setPW = document.getElementById("form_pw").value;;
+
 			if(setID == "18dchinv" || setID == ""){
 				alert("아이디를 입력해주세요.")
 			} else if(setPW == ""){
@@ -74,7 +74,7 @@
 				<p>계정 정보 입력</p>
 				<div class="row">
 					<div class="input-field col m6 s12">
-						<input value="18dchinv" name="form_id" type="text" spellcheck="false" autocomplete="off" tabindex=5 required>
+						<input id="form_id" name="form_id" type="text" value="18dchinv" spellcheck="false" autocomplete="off" tabindex=5 required>
 						<label for="form_id">아이디</label>
 					</div>
 					<div class="input-field col m6 s12">
