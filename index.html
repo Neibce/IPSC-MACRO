@@ -20,6 +20,8 @@
 </head>
 <body class="blue-grey lighten-2">
 	<script type="text/javascript">
+		window.onpopstate = undefined;
+
 		var classSelected;
 		var setID;
 		var setPW;
@@ -34,11 +36,11 @@
 				document.getElementById("ifrm-hr").classList.remove("hidden");
 				document.form_main.target ="ifrm"
 				document.form_main.action = "/ipsc_login.php";
-  			document.form_main.submit();
+				document.form_main.submit();
 
-  			history.pushState(null, null, location.href); 
+				history.pushState(null, null, location.href); 
 				window.onpopstate = function(event) { 
-					window.parent.location.reload();
+					location.replace("/");
 				}
 			}
 		}
@@ -50,51 +52,51 @@
 			<form id="form-main" name="form_main" method="POST">
 				<hr>
 				<p>진행할 강좌 선택</p>
-		    <p>
-		      <label>
-		        <input name="class" type="radio" value="6" tabindex=2 checked />
-		        <span>[6월] 발명과 창의성(9)</span>
-		      </label>
-		    </p>
-		    <p>
-		      <label>
-		        <input name="class" type="radio" value="7" tabindex=3 />
-		        <span>[7월] 세상을 바꾼 발명(3)</span>
-		      </label>
-		    </p>
-		    <p>
-		      <label>
-		        <input name="class" type="radio" value="8" tabindex=4 />
-		        <span>[8월] 저작권과 친구될래요(3)</span>
-		      </label>
-		    </p>
-		    <hr>
-		    <p>계정 정보 입력</p>
-	      <div class="row">
-			    <div class="input-field col m6 s12">
-			      <input value="18dchinv" name="form_id" type="text" spellcheck="false" autocomplete="off" tabindex=5 required>
-			      <label for="form_id">아이디</label>
-			    </div>
-			    <div class="input-field col m6 s12">
-			      <input id="form_pw" name="form_pw" type="password" tabindex=6 required>
-			      <label for="form_pw">비밀번호</label>
-			    </div>
-			  </div>
-			  <hr>
-			  <button id="form-submit" class="btn waves-effect waves-light center" onclick="start_macro()">실행
-			    <i class="material-icons right">send</i>
-			  </button>
-		  </form>
-		  <hr id="ifrm-hr" class="hidden">
-		  <iframe id="ifrm" name="ifrm" class="hidden" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
-  	</div>
-  	<p class="footer">
-  		<a class="github-button" href="https://github.com/Neibce/IPSC-MACRO" aria-label="Watch Neibce/IPSC-MACRO on GitHub">Watch on GitHub</a>
-  		<br>
-  		<b>v180613 (Beta)</b>
-  		<br>
-  		ⓒ 2018 Yang Jun-Young
-  	</p>
+				<p>
+					<label>
+						<input name="class" type="radio" value="6" tabindex=2 checked />
+					<span>[6월] 발명과 창의성(9)</span>
+					</label>
+				</p>
+				<p>
+					<label>
+						<input name="class" type="radio" value="7" tabindex=3 />
+						<span>[7월] 세상을 바꾼 발명(3)</span>
+					</label>
+				</p>
+				<p>
+				<label>
+					<input name="class" type="radio" value="8" tabindex=4 />
+						<span>[8월] 저작권과 친구될래요(3)</span>
+				</label>
+				</p>
+				<hr>
+				<p>계정 정보 입력</p>
+				<div class="row">
+					<div class="input-field col m6 s12">
+						<input value="18dchinv" name="form_id" type="text" spellcheck="false" autocomplete="off" tabindex=5 required>
+						<label for="form_id">아이디</label>
+					</div>
+					<div class="input-field col m6 s12">
+						<input id="form_pw" name="form_pw" type="password" tabindex=6 required>
+						<label for="form_pw">비밀번호</label>
+					</div>
+				</div>
+				<hr>
+				<button id="form-submit" class="btn waves-effect waves-light center" onclick="start_macro()">실행
+				<i class="material-icons right">send</i>
+				</button>
+			</form>
+			<hr id="ifrm-hr" class="hidden">
+			<iframe id="ifrm" name="ifrm" class="hidden" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+		</div>
+		<p class="footer">
+			<a class="github-button" href="https://github.com/Neibce/IPSC-MACRO" aria-label="Watch Neibce/IPSC-MACRO on GitHub">Watch on GitHub</a>
+			<br>
+			<b>v180613 (Beta)</b>
+			<br>
+			ⓒ 2018 Yang Jun-Young
+		</p>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
