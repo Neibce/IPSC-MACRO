@@ -35,6 +35,11 @@
 				document.form_main.target ="ifrm"
 				document.form_main.action = "/ipsc_login.php";
   			document.form_main.submit();
+
+  			history.pushState(null, null, location.href); 
+				window.onpopstate = function(event) { 
+					window.parent.location.reload();
+				}
 			}
 		}
 	</script>
@@ -88,7 +93,7 @@
   		<br>
   		<b>v180613 (Beta)</b>
   		<br>
-  		ⓒ 2018 Yang-Jun-Young
+  		ⓒ 2018 Yang Jun-Young
   	</p>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
