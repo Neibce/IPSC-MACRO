@@ -339,10 +339,10 @@ function ob_echo($string){
 	echo $string;
 	echo "<br>";
 	echo "<script>document.body.scrollTop = document.body.scrollHeight;</script>";
-  echo str_pad('', 4096);
+	echo str_pad('', 4096);
 
-  ob_flush();
-  flush();
+	ob_flush();
+	flush();
 }
 
 if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["class"])){
