@@ -159,10 +159,12 @@ function ipsc_study($class_num, $sid){
 
 		for($page_num = 1; $page_num <= $max_page_num; $page_num++){
 			ob_echo("## {$num}/{$max_num}강 {$page_num}/{$max_page_num}페이지 진행 중...");
-			ipsc_study_1(get_orig_url($class_num, $num, $usr_num), $sid);
-			ipsc_study_2(get_page_location($class_num, $num, $page_num), $page_num, $sid);
-			ipsc_study_3($page_num, $sid);
-			ipsc_study_4($page_num, $sid);
+			$sec_1 = ipsc_study_1(get_orig_url($class_num, $num, $usr_num), $sid);
+			$sec_2 = ipsc_study_2(get_page_location($class_num, $num, $page_num), $page_num, $sid);
+			$sec_3 = ipsc_study_3($page_num, $sid);
+			$sec_4 = ipsc_study_4($page_num, $sid);
+			$sec = $sec_1 + $sec_2 + $sec_3 + $sec_4;
+			ob_echo("# {$sec}sec.");
 		}
 	}
 }
@@ -171,25 +173,25 @@ function ipsc_study_1($orig_url, $sid) {
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-	  CURLOPT_URL => $orig_url,
-	  CURLOPT_RETURNTRANSFER => true,
-	  CURLOPT_ENCODING => "",
-	  CURLOPT_MAXREDIRS => 10,
-	  CURLOPT_TIMEOUT => 30,
-	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	  CURLOPT_CUSTOMREQUEST => "GET",
-	  CURLOPT_FRESH_CONNECT => TRUE,
-	  CURLOPT_HTTPHEADER => array(
-	    "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-	    "accept-encoding: gzip, deflate, br",
-	    "accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-	    "cache-control: no-cache",
-	    "cookie: __utmz=220622919.1522686914.1.1.utmcsr=blog.naver.com|utmccn=(referral)|utmcmd=referral|utmcct=/PostView.nhn; WMONID=5FVd0GFvKXC; B2BDOMAIN=2387cae80c2cfca85d93e024d58424d97e3ba560a216b8f8ad8d9a0bb74d0bb0;{$sid}__utma=220622919.595398913.1522686914.1526827557.1527221497.7; __utmc=220622919; __utmt=1; __utmb=220622919.7.10.1527221497; ContentLogSeq=86234919",
-	    "postman-token: 2c8e9b67-b20b-2e26-6e66-13cb8bf74baf",
-	    "referer: https://dchs.ipacademy.net/servlet/CourseController?cmd=6&flag=1",
-	    "upgrade-insecure-requests: 1",
-	    "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36"
-	  ),
+		CURLOPT_URL => $orig_url,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_FRESH_CONNECT => TRUE,
+		CURLOPT_HTTPHEADER => array(
+			"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+			"accept-encoding: gzip, deflate, br",
+			"accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+			"cache-control: no-cache",
+			"cookie: __utmz=220622919.1522686914.1.1.utmcsr=blog.naver.com|utmccn=(referral)|utmcmd=referral|utmcct=/PostView.nhn; WMONID=5FVd0GFvKXC; B2BDOMAIN=2387cae80c2cfca85d93e024d58424d97e3ba560a216b8f8ad8d9a0bb74d0bb0;{$sid}__utma=220622919.595398913.1522686914.1526827557.1527221497.7; __utmc=220622919; __utmt=1; __utmb=220622919.7.10.1527221497; ContentLogSeq=86234919",
+			"postman-token: 2c8e9b67-b20b-2e26-6e66-13cb8bf74baf",
+			"referer: https://dchs.ipacademy.net/servlet/CourseController?cmd=6&flag=1",
+			"upgrade-insecure-requests: 1",
+			"user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36"
+		),
 	));
 
 	$response = curl_exec($curl);
@@ -199,9 +201,9 @@ function ipsc_study_1($orig_url, $sid) {
 	curl_close($curl);
 
 	if ($err) {
-	  return 0;
+		return 0;
 	} else {
-  	ob_echo($info['total_time']. 'sec<br>'. $info['url']);
+		return $info['total_time'];
 	}
 }
 
@@ -239,7 +241,7 @@ function ipsc_study_2($page_location, $page_num, $sid){
 	if ($err) {
 	  echo "cURL Error #:" . $err;
 	} else {
-	  ob_echo($info['total_time']. 'sec<br>'. $info['url']);
+	  return $info['total_time'];
 	}
 }
 
@@ -278,7 +280,7 @@ function ipsc_study_3($page_num, $sid){
 	if ($err) {
 	  echo "cURL Error #:" . $err;
 	} else {
-	  ob_echo($info['total_time']. 'sec<br>'. $info['url']);
+	  return $info['total_time'];
 	}
 }
 
@@ -317,7 +319,7 @@ function ipsc_study_4($page_num, $sid){
 	if ($err) {
 	  echo "cURL Error #:" . $err;
 	} else {
-	  ob_echo($info['total_time']. 'sec<br>'. $info['url']);
+	  return $info['total_time'];
 	}
 }
 
@@ -354,7 +356,7 @@ if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["clas
 ob_start();
 ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family: 'NanumSquare', sans-serif;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style>");
 ob_echo("## IPSC MACRO 18.06.16 ##");
-ob_echo("## (c) 2018 Yang-Jun-Young ##");
+ob_echo("## (c) 2018 Yang Jun-Young ##");
 ob_echo("#");
 ob_echo("** 새로고침 혹은 페이지 이동 시 정상 작동하지 않을 수 있습니다.");
 ob_echo("#");
@@ -380,7 +382,7 @@ if(stristr($c_response, "document.redirect.submit();")) {
 	ob_echo("## 선택한 강좌: ".get_study_name($_POST["class"]));
 	ob_echo("## 작업 진행 중에 창을 닫을 경우 작업이 중단 될 수 있습니다.");
 	ob_echo("#");
-	sleep(4);
+	sleep(3);
 
 	ipsc_study($_POST["class"], $sid);
 
