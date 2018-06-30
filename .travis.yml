@@ -6,17 +6,15 @@ language: php
 # Build matrix options
 matrix:
   include:
-    - php: 5.5
+    - php: 7.2
       env: WP_TRAVISCI=travis:js
-    - php: 5.2
+    - php: 7.0
       env: WP_TRAVISCI=travis:phpunit
-    - php: 5.3
+    - php: 7.1
       env: WP_TRAVISCI=travis:phpunit
-    - php: 5.4
+    - php: 7.1.9
       env: WP_TRAVISCI=travis:phpunit
-    - php: 5.5
-      env: WP_TRAVISCI=travis:phpunit
-    - php: 5.6
+    - php: 7.2
       env: WP_TRAVISCI=travis:phpunit
     - php: hhvm
       env: WP_TRAVISCI=travis:phpunit
