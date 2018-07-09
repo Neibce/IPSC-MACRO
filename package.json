@@ -7,7 +7,7 @@
   },
   "bugs": {
     "url": "https://github.com/Neibce/IPSC-MACRO/issues"
-  }
+  },
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   }
