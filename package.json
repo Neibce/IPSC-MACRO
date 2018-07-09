@@ -1,0 +1,11 @@
+{
+  "name": "IPSC-MACRO",
+  "version": "180709",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neibce/IPSC-MACRO/"
+  },
+  "bugs": {
+    "url": "https://github.com/Neibce/IPSC-MACRO/issues"
+  }
+}
