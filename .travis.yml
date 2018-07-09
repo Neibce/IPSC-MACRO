@@ -5,3 +5,5 @@ php:
 - 7.0
 - 7.2
 script: phpunit ipsc_login.php
+after_success:
+  - npm run coveralls
