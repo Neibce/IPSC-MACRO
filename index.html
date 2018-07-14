@@ -16,10 +16,17 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-	<link rel="stylesheet" href="https://res.cloudinary.com/dkpdmzje0/raw/upload/v1528885597/main.min.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/dkpdmzje0/raw/upload/v1531534824/main.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body class="blue-grey lighten-2">
 	<script type="text/javascript">
+		var checkUnload = false;
+		$(window).bind("beforeunload", function (e){
+			if(checkUnload) return "창을 닫을경우 작업이 취소됩니다.";
+		});
+
 		window.onpopstate = undefined;
 
 		function start_macro(){
@@ -35,7 +42,7 @@
 				document.getElementById("ifrm").classList.remove("hidden");
 				document.getElementById("ifrm-hr").classList.remove("hidden");
 				document.form_main.target ="ifrm"
-				document.form_main.action = "/ipsc_login.php";
+				document.form_main.action = "./ipsc_login.php";
 				document.form_main.submit();
 
 				history.pushState(null, null, location.href); 
@@ -48,25 +55,32 @@
 	<div class="container">
 		<div id="main" class="card-panel">
 			<h1>IPSC MACRO</h1>
-
+			<div class="card notice info">
+				<i class="material-icons left">info</i>
+				[18.07.14] 서버가 정상적으로 복구되었습니다. 08.14 이후 서버 중지 예정입니다.
+			</div>
+			<div class="card notice alert">
+				<i class="material-icons left">warning</i>
+				반드시 매크로 실행 후 IP-SCHOOL에 접속하여 확인하시기 바랍니다.
+			</div>
 			<form id="form-main" name="form_main" method="POST">
 				<hr>
 				<p>진행할 강좌 선택</p>
 				<p>
 					<label>
-						<input name="class" type="radio" value="6" tabindex=2 checked />
+						<input name="form_month" type="radio" value="6" tabindex=2 />
 					<span>[6월] 발명과 창의성(9)</span>
 					</label>
 				</p>
 				<p>
 					<label>
-						<input name="class" type="radio" value="7" tabindex=3 />
+						<input name="form_month" type="radio" value="7" tabindex=3 checked />
 						<span>[7월] 세상을 바꾼 발명(3)</span>
 					</label>
 				</p>
 				<p>
 				<label>
-					<input name="class" type="radio" value="8" tabindex=4 />
+					<input name="form_month" type="radio" value="8" tabindex=4 />
 						<span>[8월] 저작권과 친구될래요(3)</span>
 				</label>
 				</p>
@@ -83,20 +97,22 @@
 					</div>
 				</div>
 				<hr>
-				<button id="form-submit" class="btn waves-effect waves-light center" onclick="start_macro()">실행
-				<i class="material-icons right">send</i>
-				</button>
+				<div id="div-btn">
+					<button id="form-submit" class="btn waves-effect waves-light center" onclick="start_macro()">실행
+					<i class="material-icons right">send</i>
+					</button>
+				</div>
 			</form>
 			<hr id="ifrm-hr" class="hidden">
 			<iframe id="ifrm" name="ifrm" class="hidden" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
 		</div>
-		<p class="footer">
-			<a class="github-button" href="https://github.com/Neibce/IPSC-MACRO" aria-label="Watch Neibce/IPSC-MACRO on GitHub">Watch on GitHub</a>
-			<br>
-			<b>v180619 (Beta)</b>
-			<br>
-			ⓒ 2018 Yang Jun-Young
-		</p>
+		<div class="footer">
+			<p>
+				<a class="github-button" href="https://github.com/Neibce/IPSC-MACRO" aria-label="Watch Neibce/IPSC-MACRO on GitHub">Watch on GitHub</a>
+				<a href="https://travis-ci.org/Neibce/IPSC-MACRO"><img src="https://api.travis-ci.org/Neibce/IPSC-MACRO.svg?branch=master"></a>
+			</p>
+			<p><b>v180714 (Release)</b><br>ⓒ 2018 Yang Jun-Young</p>
+		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
