@@ -1,17 +1,20 @@
 @import "https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css";
 @import "https://fonts.googleapis.com/css?family=Gugi";
 body {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-family: 'NanumSquare', sans-serif;
   text-align: center;
 }
 hr {
   background: #aaa;
   border: 0;
-  height: 1px;
+  height: 0.9px;
 }
 p {
-  font-size: 15px;
+  margin: 0.9em 0;
+}
+label span {
+  font-size: 1.1rem !important;
 }
 h1 {
   font-size: 3.5rem;
@@ -20,6 +23,9 @@ h1 {
 }
 .footer {
   margin: 0.35em 0;
+}
+.footer p {
+  margin: 0.6em 0;
 }
 .container {
   margin: 50px auto;
@@ -35,6 +41,20 @@ h1 {
   height: 0 !important;
   border: 0 !important;
 }
+.notice {
+  font-size: 1.1rem;
+  display: flex;
+  border-radius: 5px;
+  color: #fff;
+  padding: 8px;
+  text-align: left;
+}
+.notice.info {
+  background: #00a2ea;
+}
+.notice.alert {
+  background: #ffa400;
+}
 #form-main {
   margin: 1.5rem 1.1rem;
 }
@@ -44,8 +64,10 @@ h1 {
   max-width: 470px;
   min-width: 250px;
 }
-#form-submit {
+#div-btn {
   margin-top: 17px;
+}
+#form-submit {
   padding: 0 30px;
   font-size: 15px;
   font-family: 'NanumSquare', sans-serif;
@@ -57,4 +79,7 @@ h1 {
 .input-field {
   margin-top: .7rem;
   margin-bottom: .7rem;
+}
+#table-progress td {
+  overflow: hidden;
 }
