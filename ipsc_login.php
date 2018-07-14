@@ -1,6 +1,8 @@
 <?php
 header("Pragma: no-cache");
 header("Cache-Control: no-cache,must-revalidate");
+header("Content-Type: text/html; charset=utf-8");
+header('X-Accel-Buffering: no');
 
 function login($id, $pw){
 	$curl = curl_init();
@@ -15,6 +17,7 @@ function login($id, $pw){
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
 		CURLOPT_FRESH_CONNECT => TRUE,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_CUSTOMREQUEST => "POST",
 		CURLOPT_POSTFIELDS => "sso.FU=%2Fservlet%2FMainController%3Fsd%3DIP%26aspseq%3D1588%26CT%3D5&sso.ID={$id}&sso.PU=https%3A%2F%2Fwww.ipacademy.net%2Fservlet%2FLoginController%3Fcmd%3D1&sso.PW={$pw}&sso.SU=https%3A%2F%2Fdchs.ipacademy.net%2Fservlet%2FLoginController%3Fcmd%3D1%26sd%3DIP%26aspseq%3D1588%26CT%3D5&x=28&y=30",
 		CURLOPT_HTTPHEADER => array(
@@ -38,7 +41,8 @@ function login($id, $pw){
 	curl_close($curl);
 
 	if ($err) {
-		echo "cURL Error #:" . $err;
+		ob_echo($err);
+		exit();
 	} else {
 		return $response;
 	}
@@ -69,6 +73,7 @@ function get_usr_num($num, $sid){
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => "GET",
 		CURLOPT_FRESH_CONNECT => TRUE,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
 		CURLOPT_HTTPHEADER => array(
 			"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -91,7 +96,8 @@ function get_usr_num($num, $sid){
 	curl_close($curl);
 
 	if ($err) {
-		echo "cURL Error #:" . $err;
+		ob_echo($err);
+		exit();
 	} else {
 		return $matches[1];
 	}
@@ -160,13 +166,13 @@ function ipsc_study($class_num, $sid){
 
 		for($page_num = 1; $page_num <= $max_page_num; $page_num++){
 			ob_echo("## {$num}/{$max_num}강 {$page_num}/{$max_page_num}페이지 진행 중...");
-			$sec = 0;
 			if($page_num == 1){
-				$sec += ipsc_study_1(get_orig_url($class_num, $num, $usr_num), $sid);
+				$sec_1 = ipsc_study_1(get_orig_url($class_num, $num, $usr_num), $sid);
 			}
-			$sec += ipsc_study_2(get_page_location($class_num, $num, $page_num), $page_num, $sid);
-			$sec += ipsc_study_3($page_num, $sid);
-			$sec += ipsc_study_4($page_num, $sid);
+			$sec_2 = ipsc_study_2(get_page_location($class_num, $num, $page_num), $page_num, $sid);
+			$sec_3 = ipsc_study_3($page_num, $sid);
+			$sec_4 = ipsc_study_4($page_num, $sid);
+			$sec = $sec_1 + $sec_2 + $sec_3 + $sec_4;
 			ob_echo("# {$sec}sec.");
 		}
 	}
@@ -185,6 +191,7 @@ function ipsc_study_1($orig_url, $sid) {
 		CURLOPT_CUSTOMREQUEST => "GET",
 		CURLOPT_FRESH_CONNECT => TRUE,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_HTTPHEADER => array(
 			"accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 			"accept-encoding: gzip, deflate, br",
@@ -205,7 +212,8 @@ function ipsc_study_1($orig_url, $sid) {
 	curl_close($curl);
 
 	if ($err) {
-		return 0;
+		ob_echo($err);
+		exit();
 	} else {
 		return $info['total_time'];
 	}
@@ -225,6 +233,7 @@ function ipsc_study_2($page_location, $page_num, $sid){
 		CURLOPT_CUSTOMREQUEST => "POST",
 		CURLOPT_FRESH_CONNECT => TRUE,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_HTTPHEADER => array(
 			"accept: */*",
 			"accept-encoding: gzip, deflate, br",
@@ -244,7 +253,8 @@ function ipsc_study_2($page_location, $page_num, $sid){
 	curl_close($curl);
 
 	if ($err) {
-		echo "cURL Error #:" . $err;
+		ob_echo($err);
+		exit();
 	} else {
 		return $info['total_time'];
 	}
@@ -264,6 +274,7 @@ function ipsc_study_3($page_num, $sid){
 		CURLOPT_CUSTOMREQUEST => "POST",
 		CURLOPT_FRESH_CONNECT => TRUE,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_HTTPHEADER => array(
 			"accept: */*",
 			"accept-encoding: gzip, deflate, br",
@@ -284,7 +295,8 @@ function ipsc_study_3($page_num, $sid){
 	curl_close($curl);
 
 	if ($err) {
-		echo "cURL Error #:" . $err;
+		ob_echo($err);
+		exit();
 	} else {
 		return $info['total_time'];
 	}
@@ -304,6 +316,7 @@ function ipsc_study_4($page_num, $sid){
 		CURLOPT_CUSTOMREQUEST => "POST",
 		CURLOPT_FRESH_CONNECT => TRUE,
 		CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+		CURLOPT_TIMEOUT => 10,
 		CURLOPT_HTTPHEADER => array(
 			"accept: */*",
 			"accept-encoding: gzip, deflate, br",
@@ -324,7 +337,8 @@ function ipsc_study_4($page_num, $sid){
 	curl_close($curl);
 
 	if ($err) {
-		echo "cURL Error #:" . $err;
+		ob_echo($err);
+		exit();
 	} else {
 		return $info['total_time'];
 	}
@@ -345,24 +359,24 @@ function get_study_name($num){
 }
 
 function ob_echo($string){
-	echo $string;
-	echo "<br>";
-	echo "<script>document.body.scrollTop = document.body.scrollHeight;</script>";
-	echo str_pad('', 4096);
+	print $string;
+	print "<br>";
+	print "<script>document.body.scrollTop = document.body.scrollHeight;</script>";
+	print str_pad('', 32768);
 
 	ob_flush();
 	flush();
 }
 
-if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["class"])){
+if(!isset($_POST["form_id"]) || !isset($_POST["form_pw"]) || !isset($_POST["form_month"])){
 	echo "ERROR.";
 	ob_echo("<br><span onClick=\"window.parent.location.reload()\" style=\"color: blue; cursor: pointer\">뒤로가기</span>");
 	exit();
 }
 
 ob_start();
-ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family: 'NanumSquare', sans-serif;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style>");
-ob_echo("## IPSC MACRO 18.06.19 ##");
+ob_echo("<style type=\"text/css\">@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');body{font-family: 'NanumSquare', sans-serif;overflow-x: hidden;}::-webkit-scrollbar{width: 10px;}::-webkit-scrollbar-track{background: #f0f0f0;}::-webkit-scrollbar-thumb{background: #ccc;}::-webkit-scrollbar-thumb:hover {background: #999;}</style><script>window.parent.checkUnload = true;</script>");
+ob_echo("## IPSC MACRO 18.07.14 ##");
 ob_echo("## (c) 2018 Yang Jun-Young ##");
 ob_echo("#");
 ob_echo("** 새로고침 혹은 페이지 이동 시 정상 작동하지 않을 수 있습니다.");
@@ -370,9 +384,8 @@ ob_echo("#");
 ob_echo("** 계정 정보는 어떠한 곳에도 저장되지 않습니다.");
 ob_echo("#");
 ob_echo("## 로그인 시도 중...");
-
+sleep(1);
 $c_response = login($_POST["form_id"], $_POST["form_pw"]);
-
 if(stristr($c_response, "document.redirect.submit();")) {
 	ob_echo("## 로그인 성공.");
 
@@ -386,19 +399,19 @@ if(stristr($c_response, "document.redirect.submit();")) {
 
 	ob_echo("#");
 	ob_echo("## 작업을 시작합니다.");
-	ob_echo("## 선택한 강좌: ".get_study_name($_POST["class"]));
+	ob_echo("## 선택한 강좌: ".get_study_name($_POST["form_month"]));
 	ob_echo("## 작업 진행 중에 창을 닫을 경우 작업이 중단 될 수 있습니다.");
 	ob_echo("#");
 	sleep(1);
 
-	ipsc_study($_POST["class"], $sid);
+	ipsc_study($_POST["form_month"], $sid);
 
 	ob_echo("#");
 	ob_echo("## 작업을 완료했습니다.");
+	ob_echo("## 반드시 IP-SCHOOL에 접속하셔서 완료 여부를 학인하시기 바랍니다.");
 	ob_echo("## 창을 닫으셔도 됩니다.");
-	ob_echo("<span onClick=\"window.parent.location.reload()\" style=\"color: blue; cursor: pointer\">뒤로가기</span>");
 } else {
 	ob_echo("** 아이디 혹은 비밀번호가 일치하지 않습니다.");
-	ob_echo("<span onClick=\"window.parent.location.reload()\" style=\"color: blue; cursor: pointer\">뒤로가기</span>");
 }
+ob_echo("<span onClick=\"window.parent.location.reload()\" style=\"color: blue; cursor: pointer\">뒤로가기</span><script>window.parent.checkUnload = false;</script>");
 ob_end_flush();
