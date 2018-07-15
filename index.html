@@ -16,7 +16,7 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-	<link rel="stylesheet" href="https://res.cloudinary.com/dkpdmzje0/raw/upload/v1531534824/main.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/dkpdmzje0/raw/upload/v1531571638/main.min.css">
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
@@ -38,9 +38,11 @@
 			} else if(setPW == ""){
 				alert("비밀번호를 입력해주세요.")
 			} else {
-				document.getElementById("form-main").style.display = "none";
+				$("#form-main").hide();
+				$(".notice").hide();
 				document.getElementById("ifrm").classList.remove("hidden");
 				document.getElementById("ifrm-hr").classList.remove("hidden");
+
 				document.form_main.target ="ifrm"
 				document.form_main.action = "./ipsc_login.php";
 				document.form_main.submit();
@@ -57,13 +59,13 @@
 			<h1>IPSC MACRO</h1>
 			<div class="card notice info">
 				<i class="material-icons left">info</i>
-				[18.07.14] 서버가 정상적으로 복구되었습니다. 08.14 이후 서버 중지 예정입니다.
+				[18.07.14] 서버가 정상적으로 복구되었습니다. 08.14 까지 서버 유지 예정입니다.
 			</div>
 			<div class="card notice alert">
 				<i class="material-icons left">warning</i>
-				반드시 매크로 실행 후 IP-SCHOOL에 접속하여 확인하시기 바랍니다.
+				반드시 매크로 실행 후 IP-SCHOOL에 접속하여 완료여부를 확인하시기 바랍니다.
 			</div>
-			<form id="form-main" name="form_main" method="POST">
+			<form id="form-main" name="form_main" method="POST" autocomplete="off">
 				<hr>
 				<p>진행할 강좌 선택</p>
 				<p>
@@ -88,7 +90,7 @@
 				<p>계정 정보 입력</p>
 				<div class="row">
 					<div class="input-field col m6 s12">
-						<input id="form_id" name="form_id" type="text" value="18dchinv" spellcheck="false" autocomplete="off" tabindex=5 required>
+						<input id="form_id" name="form_id" type="text" value="18dchinv" spellcheck="false" tabindex=5 required>
 						<label for="form_id">아이디</label>
 					</div>
 					<div class="input-field col m6 s12">
