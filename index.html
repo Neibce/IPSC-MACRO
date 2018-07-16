@@ -34,9 +34,9 @@
 			var setPW = document.getElementById("form_pw").value;
 
 			if(setID == "18dchinv" || setID == ""){
-				alert("아이디를 입력해주세요.")
+				alert("아이디를 입력해주세요.");
 			} else if(setPW == ""){
-				alert("비밀번호를 입력해주세요.")
+				alert("비밀번호를 입력해주세요.");
 			} else {
 				$("#form-main").hide();
 				$(".notice").hide();
@@ -63,9 +63,9 @@
 			</div>
 			<div class="card notice alert">
 				<i class="material-icons left">warning</i>
-				반드시 매크로 실행 후 IP-SCHOOL에 접속하여 완료여부를 확인하시기 바랍니다.
+				반드시 매크로 실행 후 IP-SCHOOL에 접속하여 수료요청 및 완료여부를 확인하시기 바랍니다.
 			</div>
-			<form id="form-main" name="form_main" method="POST" autocomplete="off">
+			<form id="form-main" name="form_main" method="POST" autocomplete="off" onsubmit="return false">
 				<hr>
 				<p>진행할 강좌 선택</p>
 				<p>
